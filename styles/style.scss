@@ -1,0 +1,135 @@
+@import  "../node_modules/hover.css/scss/hover.scss";
+
+/* VARIABLES */
+
+$size-sm: 0.5rem;
+$size-md: 1.5rem;
+
+/* MIXINS */
+
+@mixin shadow {
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+@mixin gradient {
+	background-color: #4158D0;
+	background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+@mixin text-gradient {
+ 	color: #8a3369;
+ 	@include gradient;
+ 	background-clip: text; 
+ 	-webkit-background-clip: text; 
+ 	-webkit-text-fill-color: transparent; 
+}
+
+/* ELEMENTS */
+
+body {
+	& {
+		gap: $size-md;
+		display: flex;
+		@include gradient;
+		align-items: center;
+		justify-content: center;
+		font-family: system-ui, sans-serif;
+	}
+
+	& > * {
+		@include shadow;
+	}
+
+	* {
+		border: none;
+		color: var(--fg);
+		padding: $size-md;
+		text-align: center;
+		font-weight: bolder;
+		border-radius: $size-sm;
+		background-color: var(--bg_h);
+	}
+
+	* > * {
+		cursor: pointer;
+		background-color: var(--bg_s);
+	}
+}
+
+body {
+	button:active {
+		@include push;
+		background-color: var(--bg2);
+	}
+
+	#gradient-box {
+		padding: 0.2rem;
+		@include gradient;
+	}
+
+	button:hover, #calc-input:active {
+		background-color: var(--bg1);
+	}
+}
+
+body {
+	@media screen and (max-width: 600px) {
+		#calc-history {
+			display: none;
+		}
+	}
+}
+
+#calculator {
+	& {
+		gap: $size-sm;
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+	}
+
+	#calc-input {
+		outline: none;
+		font-size: larger;
+	}
+
+	#calc-dm-label {
+		@include text-gradient;
+	}
+
+	& > #gradient-box {
+		grid-column: span 4;
+	}
+}
+
+#calc-history {
+
+	#calc-history-list {
+		margin: 0rem;
+		padding: 0rem;
+		display: none;
+		margin-bottom: $size-sm;
+	}
+
+	#calc-history-list {
+		cursor: default;
+		background-color: var(--bg_h);
+	}
+
+	#calc-history-list button {
+		width: 100%;
+		display: block;
+		margin-bottom: $size-sm;
+	}
+
+	#calc-history-reset, #calc-help-btn {
+		width: 100%;
+	}
+
+	#gradient-box:last-child {
+		margin-top: $size-sm;
+	}
+}
+
+html, body {
+	height: 100vh;
+}
